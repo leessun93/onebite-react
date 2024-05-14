@@ -28,6 +28,15 @@ function repeat(count, callback){
     }
 }
 
+//콜백함수다.
 repeat(5, function(idx){
     console.log(idx);
 });
+repeat(5, function(){
+    console.log(idx *2);
+})//더블
+repeat(5, function(){
+    console.log(idx *3);
+})//트리플
+
+//callback 인자영역에 함수 다시 넣어서 쓰겠다는것인듯

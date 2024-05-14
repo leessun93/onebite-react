@@ -10,6 +10,16 @@
 function getArea(width, height){// 매개변수
     let area = width * height;
 
-    console.log(area);
+    function another(){
+        conosole.log("어나더"); // 펑션 속의 펑션 == 중첩함수
+    }
+    return area;
 }
-getArea(10, 20); //인수
+let area1 = getArea(10, 20); //인수
+console.log(area1);
+
+//자바스크립트에서는 함수를 제일 아래 선언해도 동작을한다.
+//이는 호이스팅이라는 효과 덕분인데
+//호이스팅이란뜻은 끌어올리단 뜻이다.
+//선언문이 아무리 밑바닥에 선언되어도 최 상단에서 호출해준다.
+
