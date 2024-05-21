@@ -1,4 +1,4 @@
-import { useState, useRef, useReducer, useCallback } from 'react';
+import { useState, useRef, useReducer, useCallback, createContext, useMemo } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Editor from './components/Editor';
@@ -35,6 +35,14 @@ function reducer(state, action){
     default : return state;
   }
 }
+
+// //리랜더링 되니까 App외에 생성하자
+// export const TodoContext = createContext();
+
+//dispatch와 state 컨택스트로 분리
+export const TodoStatecontext = createContext();
+export const TodoDispatchContext = createContext();
+
 
 function App() {
 
@@ -77,12 +85,21 @@ function App() {
     });
   }, []);
 
+  const memoizedDispatch = useMemo(()=>{
+    return {onCreate, onUpdate, onDelete};
+  }, []);
   return (
     <div className='App'>
       {/* <Exam /> */}
       <Header/>
-      <Editor onCreate={onCreate}/>
-      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete}/>
+      {/* <TodoContext.Provider value={{todos, onCreate, onUpdate, onDelete}}> */}
+      <TodoStatecontext.Provider value={todos}>
+        <TodoDispatchContext.Provider value={memoizedDispatch}>
+          <Editor />
+          <List />
+        </TodoDispatchContext.Provider>
+      </TodoStatecontext.Provider>    
+      {/* </TodoContext.Provider> */}
     </div>
   )
 }
