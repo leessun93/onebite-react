@@ -58,10 +58,12 @@ export const DiaryStateContext = createContext();
 export const DiaryDispatchContext = createContext();
 
 function App() {
+  // const [isLoading, setIsLoading] = useState(true);
 
   const [data, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef(3);
 
+  // localStorage.setItem("test", "테스트벨류입니다,");
   //새로운 일기 추가
   const onCreate = (createdDate, emotionId, content) =>{
     dispatch({
